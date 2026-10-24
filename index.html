@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<title>NEXORA KEY by N TECH OFC</title>
+<meta name="theme-color" content="#050508">
+<meta name="description" content="English, සිංහල, العربية glass keyboard by N TECH OFC">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" type="image/png" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NEXORA KEY">
+<style>
+:root{
+  --bg:#050508; --red:#ff2850; --cyan:#00d2ff; --text:#f3f5fa; --mute:#8d93a6;
+  --glass:rgba(255,255,255,.07); --glass-hi:rgba(255,255,255,.14); --edge:rgba(255,255,255,.16);
+  --kh:46px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
+  font-family:"Noto Sans Sinhala","Iskoola Pota","Noto Sans Arabic",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+body::before,body::after{content:"";position:fixed;z-index:-1;width:70vmax;height:70vmax;border-radius:50%;filter:blur(90px);opacity:.5}
+body::before{background:var(--red);top:-35vmax;left:-30vmax}
+body::after{background:var(--cyan);bottom:-38vmax;right:-32vmax;opacity:.38}
+.app{display:flex;flex-direction:column;height:100%;padding:env(safe-area-inset-top) 0 0;max-width:640px;margin:0 auto}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px 8px}
+header img{width:40px;height:40px;border-radius:11px;box-shadow:0 0 18px rgba(255,40,80,.35)}
+header h1{font-size:18px;letter-spacing:.14em;margin:0;font-weight:700}
+header p{margin:1px 0 0;font-size:12px;color:var(--mute);letter-spacing:.06em}
+.spacer{flex:1}
+.pill{border:1px solid var(--edge);background:var(--glass);color:var(--text);border-radius:999px;padding:8px 14px;font:inherit;font-size:13px;
+  backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4)}
+.pill[hidden]{display:none}
+.pill:active{background:var(--glass-hi)}
+.pill.on{border-color:var(--cyan);box-shadow:0 0 12px rgba(0,210,255,.35)}
+main{flex:1;min-height:0;display:flex;flex-direction:column;padding:6px 14px 10px;gap:10px}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.04));border:1px solid var(--edge);border-radius:22px;
+  backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 40px rgba(0,0,0,.5)}
+.editor{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+textarea{flex:1;min-height:0;width:100%;resize:none;background:transparent;border:0;outline:0;color:var(--text);
+  font:inherit;font-size:20px;line-height:1.55;padding:16px 18px;caret-color:var(--cyan);-webkit-user-select:text;user-select:text}
+textarea::placeholder{color:var(--mute)}
+.tools{display:flex;gap:8px;padding:8px 10px 10px;border-top:1px solid rgba(255,255,255,.08);align-items:center}
+.tools .pill{padding:7px 12px}
+.count{margin-left:auto;font-size:12px;color:var(--mute);padding-right:6px}
+.kb{padding:8px 6px calc(8px + env(safe-area-inset-bottom));border-radius:24px 24px 0 0;margin:0 -2px;border-bottom:0}
+.langs{display:flex;gap:6px;padding:0 4px 8px}
+.langs button{flex:1;height:36px;border-radius:12px;border:1px solid transparent;background:transparent;color:var(--mute);font:inherit;font-size:14px;font-weight:600}
+.langs button.on{color:var(--text);border-color:var(--edge);background:var(--glass-hi);
+  box-shadow:0 0 0 1px rgba(255,40,80,.35),0 0 16px rgba(255,40,80,.25),inset 0 0 14px rgba(0,210,255,.12)}
+.sub{display:flex;gap:6px;padding:0 4px 8px}
+.sub button{flex:1;height:32px;border-radius:10px;border:1px solid var(--edge);background:var(--glass);color:var(--text);font:inherit;font-size:13px}
+.sub button.on{border-color:var(--cyan);box-shadow:0 0 12px rgba(0,210,255,.3)}
+.row{display:flex;gap:5px;margin-bottom:5px;direction:ltr;justify-content:center}
+.key{flex:1 1 0;min-width:0;height:var(--kh);border-radius:12px;border:1px solid rgba(255,255,255,.13);color:var(--text);
+  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));font:inherit;font-size:19px;padding:0;
+  display:flex;align-items:center;justify-content:center;touch-action:manipulation;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 2px 0 rgba(0,0,0,.45);transition:transform .05s,background .05s}
+.key.down{transform:translateY(1px) scale(.97);background:linear-gradient(180deg,rgba(0,210,255,.35),rgba(255,40,80,.2));border-color:var(--cyan)}
+.key.fn{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));font-size:15px;flex:1.5}
+.key.act{border-color:var(--red);box-shadow:0 0 14px rgba(255,40,80,.55),inset 0 1px 0 rgba(255,255,255,.2)}
+.key.space{flex:5}
+.key.enter{flex:1.6;background:linear-gradient(180deg,rgba(255,40,80,.6),rgba(255,40,80,.25));border-color:rgba(255,40,80,.8)}
+.key.wide{flex:2}
+.key small{font-size:11px;color:var(--mute)}
+.hint{text-align:center;color:var(--mute);font-size:11px;padding:2px 0 0}
+@media (max-height:640px){:root{--kh:40px}.key{font-size:17px}}
+@media (prefers-reduced-motion:reduce){.key{transition:none}}
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 14px);transform:translate(-50%,-80px);padding:10px 18px;border-radius:999px;
+  background:rgba(20,20,28,.85);border:1px solid var(--edge);backdrop-filter:blur(14px);font-size:14px;transition:transform .25s;z-index:9}
+.toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <img src="/icon-192.png" alt="NEXORA KEY">
+    <div><h1>NEXORA KEY</h1><p>by N TECH OFC</p></div>
+    <div class="spacer"></div>
+    <button class="pill" id="installBtn" hidden>Install</button>
+  </header>
+  <main>
+    <section class="glass editor">
+      <textarea id="ta" dir="auto" inputmode="none" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="මෙතන ලියන්න… / Type here… / اكتب هنا…"></textarea>
+      <div class="tools">
+        <button class="pill" id="copy">පිටපත් කරන්න</button>
+        <button class="pill" id="share">බෙදාගන්න</button>
+        <button class="pill" id="clear">මකන්න</button>
+        <button class="pill" id="vib" title="Vibration">Haptic</button>
+        <span class="count" id="count">0</span>
+      </div>
+    </section>
+    <section class="glass kb" id="kb" aria-label="Keyboard"></section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+"use strict";
+const ta=document.getElementById("ta"), kb=document.getElementById("kb");
+const $=id=>document.getElementById(id);
+const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+// Only settings are stored. Typed text is never saved or sent anywhere.
+const st={lang:store.get("lang","si"),page:"abc",shift:0,sub:0,haptic:store.get("haptic","1")==="1",ar2:false};
+
+const CM="\u25CC";
+const SI={
+  vowels:"අ ආ ඇ ඈ ඉ ඊ උ ඌ ඍ ඎ ඏ ඐ එ ඒ ඓ ඔ ඕ ඖ".split(" "),
+  cons:"ක ඛ ග ඝ ඞ ඟ ච ඡ ජ ඣ ඤ ඥ ඦ ට ඨ ඩ ඪ ණ ඬ ත ථ ද ධ න ඳ ප ඵ බ භ ම ඹ ය ර ල ව ශ ෂ ස හ ළ ෆ".split(" "),
+  signs:[..."ා ැ ෑ ි ී ු ූ ෘ ෲ ෙ ේ ෛ ො ෝ ෞ ් ං ඃ".split(" ").map(c=>({l:CM+c,v:c})),
+    {l:CM+"\u0DCA\u200D\u0DBB",v:"\u0DCA\u200D\u0DBB"},{l:CM+"\u0DCA\u200D\u0DBA",v:"\u0DCA\u200D\u0DBA"},{l:"ZWJ",v:"\u200D",s:1},{l:"।",v:"\u0DF4"}]
+};
+const chunk=(a,n)=>{const r=[];for(let i=0;i<a.length;i+=n)r.push(a.slice(i,i+n));return r};
+const K=(v,o={})=>Object.assign({v,l:v},o);
+const mk=a=>a.map(x=>typeof x==="string"?K(x):x);
+
+function layout(){
+  const L=st.lang, rows=[];
+  if(L==="en"){
+    if(st.page==="sym"){
+      rows.push(mk([..."1234567890"]),mk([..."@#$%&-+()/"]),
+        [K("=",{}),...mk([..."*\"':;!?"]),{type:"back",l:"⌫",cls:"fn"}]);
+      rows.push(bottom(true));
+    }else{
+      const up=st.shift>0;
+      const f=s=>mk([...s].map(c=>up?c.toUpperCase():c));
+      rows.push(f("qwertyuiop"),f("asdfghjkl"),
+        [{type:"shift",l:st.shift===2?"⇪":"⇧",cls:"fn"+(st.shift?" act":"")},...f("zxcvbnm"),{type:"back",l:"⌫",cls:"fn"}]);
+      rows.push(bottom(true));
+    }
+  }else if(L==="si"){
+    const src=[SI.vowels,SI.cons,SI.signs][st.sub];
+    const n=st.sub===1?11:(st.sub===0?9:9);
+    chunk(src,n).forEach(r=>rows.push(r.map(c=>typeof c==="string"?K(c):{v:c.v,l:c.l,cls:c.s?"fn":""})));
+    rows.push(bottom(false));
+  }else{
+    if(st.ar2){
+      rows.push(mk([..."٠١٢٣٤٥٦٧٨٩"]),mk([..."ًٌٍَُِّْـ"].map(c=>({l:CM+c,v:c}))),mk([..."؟،؛«»٪﴾﴿"]));
+    }else{
+      rows.push(mk([..."ضصثقفغعهخحجد"]),mk([..."شسيبلاتنمكط"]),mk([..."ئءؤرىةوزظذ"]),);
+      rows[2].splice(5,0,K("لا"));
+    }
+    rows.push(bottom(false,true));
+  }
+  return rows;
+}
+function bottom(back,ar){
+  const r=[];
+  if(st.lang==="en")r.push({type:"page",l:st.page==="sym"?"ABC":"?123",cls:"fn"});
+  if(st.lang==="ar")r.push({type:"ar2",l:st.ar2?"أبج":"123 ً",cls:"fn"+(st.ar2?" act":"")});
+  r.push({type:"lang",l:"🌐",cls:"fn"});
+  r.push(K(st.lang==="ar"?"،":",",{cls:"fn"}));
+  r.push({type:"space",l:st.lang==="en"?"English":st.lang==="si"?"සිංහල":"العربية",cls:"space"});
+  r.push(K(st.lang==="ar"?"۔":".",{cls:"fn"}));
+  if(!back||st.lang!=="en")r.push({type:"back",l:"⌫",cls:"fn"});
+  r.push({type:"enter",l:"⏎",cls:"enter"});
+  return r;
+}
+function render(){
+  const names={en:"English",si:"සිංහල",ar:"العربية"};
+  let h='<div class="langs">'+["en","si","ar"].map(k=>`<button data-lang="${k}" class="${st.lang===k?"on":""}">${names[k]}</button>`).join("")+"</div>";
+  if(st.lang==="si")h+='<div class="sub">'+["ස්වර","ව්‍යඤ්ජන","සලකුණු"].map((t,i)=>`<button data-sub="${i}" class="${st.sub===i?"on":""}">${t}</button>`).join("")+"</div>";
+  layout().forEach((row,ri)=>{
+    h+='<div class="row">';
+    row.forEach((k,ki)=>{
+      const cls="key "+(k.cls||"")+(k.type==="space"?" space":"")+(k.type==="enter"?" enter":"");
+      h+=`<button class="${cls}" data-r="${ri}" data-k="${ki}" aria-label="${k.type||k.l}">${k.l}</button>`;
+    });
+    h+="</div>";
+  });
+  if(st.lang==="si"&&st.sub===2)h+='<div class="hint">◌ ලකුණු ඉදිරියෙන් ඇති අකුරට එකතු වේ</div>';
+  kb.innerHTML=h;
+  kb.dataset.layout="";
+  kb._rows=layout();
+  document.documentElement.style.setProperty("--kh",kb._rows.length>5?"40px":(window.innerHeight<640?"40px":"46px"));
+}
+function buzz(){if(st.haptic&&navigator.vibrate)navigator.vibrate(8)}
+function insert(t){
+  const s=ta.selectionStart,e=ta.selectionEnd;
+  ta.setRangeText(t,s,e,"end"); ta.dispatchEvent(new Event("input"));
+}
+const seg=window.Intl&&Intl.Segmenter?new Intl.Segmenter(undefined,{granularity:"grapheme"}):null;
+function backspace(){
+  const s=ta.selectionStart,e=ta.selectionEnd;
+  if(s!==e){ta.setRangeText("",s,e,"end");}
+  else if(s>0){
+    const before=ta.value.slice(Math.max(0,s-40),s);
+    let n=1;
+    if(seg){const parts=[...seg.segment(before)];n=parts.length?parts[parts.length-1].segment.length:1}
+    else{n=[...before].pop().length}
+    ta.setRangeText("",s-n,s,"end");
+  }
+  ta.dispatchEvent(new Event("input"));
+}
+function press(k){
+  buzz();
+  switch(k.type){
+    case "back":backspace();break;
+    case "enter":insert("\n");break;
+    case "space":insert(" ");break;
+    case "shift":st.shift=st.shift===0?1:st.shift===1?2:0;render();break;
+    case "page":st.page=st.page==="sym"?"abc":"sym";render();break;
+    case "ar2":st.ar2=!st.ar2;render();break;
+    case "lang":{const o=["en","si","ar"];st.lang=o[(o.indexOf(st.lang)+1)%3];store.set("lang",st.lang);st.page="abc";st.shift=0;st.ar2=false;render();}break;
+    default:
+      insert(k.v);
+      if(st.lang==="en"&&st.shift===1){st.shift=0;render();}
+  }
+}
+let rep=null,repT=null;
+function stopRep(){clearTimeout(repT);clearInterval(rep);repT=rep=null}
+kb.addEventListener("pointerdown",ev=>{
+  const b=ev.target.closest("button");if(!b)return;
+  ev.preventDefault();
+  if(b.dataset.lang){st.lang=b.dataset.lang;store.set("lang",st.lang);st.page="abc";st.shift=0;st.ar2=false;buzz();render();return}
+  if(b.dataset.sub){st.sub=+b.dataset.sub;buzz();render();return}
+  const k=kb._rows[+b.dataset.r][+b.dataset.k];if(!k)return;
+  b.classList.add("down");
+  press(k);
+  if(k.type==="back"){repT=setTimeout(()=>{rep=setInterval(backspace,55)},380)}
+});
+["pointerup","pointercancel","pointerleave"].forEach(t=>kb.addEventListener(t,ev=>{stopRep();kb.querySelectorAll(".down").forEach(x=>x.classList.remove("down"))}));
+kb.addEventListener("contextmenu",e=>e.preventDefault());
+
+// tools
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),1600)}
+const upd=()=>{$("count").textContent=(seg?[...seg.segment(ta.value)].length:[...ta.value].length)};
+ta.addEventListener("input",upd);
+$("copy").onclick=async()=>{if(!ta.value)return toast("හිස්ය");try{await navigator.clipboard.writeText(ta.value);toast("පිටපත් විය ✓")}catch(e){ta.select();document.execCommand("copy");toast("පිටපත් විය ✓")}};
+$("share").onclick=async()=>{if(!ta.value)return toast("හිස්ය");if(navigator.share){try{await navigator.share({text:ta.value})}catch(e){}}else toast("මෙම browser එකේ බෙදාගැනීම නැත")};
+$("clear").onclick=()=>{ta.value="";upd();toast("මකා දැමිණි")};
+function vibUI(){$("vib").classList.toggle("on",st.haptic)}
+$("vib").onclick=()=>{st.haptic=!st.haptic;store.set("haptic",st.haptic?"1":"0");vibUI();buzz()};
+vibUI();
+// PWA install
+let dp=null;const ib=$("installBtn");
+const standalone=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;if(!standalone)ib.hidden=false});
+ib.onclick=async()=>{if(dp){dp.prompt();await dp.userChoice;dp=null;ib.hidden=true}};
+window.addEventListener("appinstalled",()=>{ib.hidden=true});
+if(!standalone&&/iphone|ipad/i.test(navigator.userAgent)){ib.hidden=false;ib.textContent="Install";ib.onclick=()=>toast("Share → Add to Home Screen")}
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
+render();upd();
+</script>
+</body>
+</html>
