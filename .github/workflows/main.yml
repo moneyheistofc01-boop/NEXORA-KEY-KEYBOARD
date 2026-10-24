@@ -3,6 +3,10 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,12 +33,24 @@ jobs:
 
       - name: Build debug APK
         working-directory: android_project
-        run: gradle assembleDebug --stacktrace --no-daemon
+        run: gradle assembleDebug -PbuildNumber=${{ github.run_number }} --stacktrace --no-daemon
 
-      - name: Upload APK
+      - name: Upload APK artifact
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: NEXORA-KEY-debug-apk
           path: android_project/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
+
+      - name: Publish release (for in-app update)
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android_project/app/build/outputs/apk/debug/app-debug.apk nexora-key.apk
+          gh release create "build-${{ github.run_number }}" nexora-key.apk \
+            --repo "${{ github.repository }}" \
+            --title "NEXORA KEY build ${{ github.run_number }}" \
+            --notes "Automatic build ${{ github.run_number }}" \
+            --latest
